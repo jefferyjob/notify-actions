@@ -14,32 +14,12 @@ inputs:
     description: 'Message format (e.g., text, markdown, card)'
     required: true
   STATUS:
-    description: 'Deployment status, 1 means success, 0 means failure, multiple statuses can be spliced and passed, for example: 1101'
+    description: 'Deployment status, 1 means success, 0 means failure'
     required: true
   WEBHOOK_URL:
     description: 'Webhook URL for the notification service'
     required: true
-  REPO:
-    description: 'Repository name in the format "organization/repo"'
-    required: true
-  REPO_URL:
-    description: 'Repository URL pointing to the source code'
-    required: true
-  WORKFLOW_URL:
-    description: 'URL of the deployment pipeline'
-    required: true
-  BRANCH:
-    description: 'Branch being deployed (default is main)'
-    required: false
-  COMMIT_USER:
-    description: 'The author who committed the changes'
-    required: false
-  COMMIT_SHA:
-    description: 'Git SHA hash of the commit'
-    required: false
-  COMMIT_MESSAGE:
-    description: 'Commit message for the changes'
-    required: false
+
 
 runs:
   using: 'composite'
@@ -60,13 +40,6 @@ runs:
       env:
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
-#        REPO: ${{ inputs.REPO }}
-#        REPO_URL: ${{ inputs.REPO_URL }}
-#        WORKFLOW_URL: ${{ inputs.WORKFLOW_URL }}
-#        BRANCH: ${{ inputs.BRANCH }}
-#        COMMIT_USER: ${{ inputs.COMMIT_USER }}
-#        COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
-#        COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
         REPO: ${{ github.repository }}
         REPO_URL: ${{ github.event.repository.html_url }}
         WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
