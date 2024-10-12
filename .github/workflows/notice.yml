@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-#      - feature/auto_get_env
+      - feature/auto_get_env
   pull_request:
     branches:
       - main
@@ -17,23 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Print GitHub context
-        run: |
-          echo "github 信息"
-          echo "${{ toJson(github) }}"
-          echo "env 信息"
-          echo "${{ toJson(env) }}"
-
-      - name: Get Branch
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
-            echo "COMMIT_MESSAGE=PR: ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
-          else
-            echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-            echo "COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
-          fi
-
       - name: Send Notification
         uses: ./ # 使用本地 Action
         with:
@@ -41,11 +24,11 @@ jobs:
           MSG_TYPE: 'text'   # 消息类型，可设置为 'text'、'markdown' 等
           WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
           STATUS: '1' # 部署状态，'1' 表示成功，'0' 表示失败
-          REPO: ${{ github.repository }}
-          REPO_URL: ${{ github.event.repository.html_url }}
-          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          BRANCH: ${{ env.BRANCH }}
-          COMMIT_USER: ${{ github.actor }}
-          COMMIT_SHA: ${{ github.sha }}
-          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+#          REPO: ${{ github.repository }}
+#          REPO_URL: ${{ github.event.repository.html_url }}
+#          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+#          BRANCH: ${{ env.BRANCH }}
+#          COMMIT_USER: ${{ github.actor }}
+#          COMMIT_SHA: ${{ github.sha }}
+#          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
 

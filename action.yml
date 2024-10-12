@@ -48,11 +48,9 @@ runs:
       shell: bash
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          echo "这里是 pull_request"
           echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
           echo "COMMIT_MESSAGE=PR: ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
         else
-          echo "Test TestTestTestTest"
           echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
         fi
