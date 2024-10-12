@@ -42,10 +42,10 @@ inputs:
     required: false
 
 runs:
-  using: 'composite'
+  using: 'docker'
+  image: 'alpine:latest'
   steps:
-    - shell: bash
-      env:
+    - env:
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
         REPO: ${{ inputs.REPO }}
@@ -56,5 +56,23 @@ runs:
         COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
       run: |
-        chmod +x notice.sh
+        apk add --no-cache bash curl
+        chmod +x /notice.sh
         ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
+
+#  using: 'composite'
+#  steps:
+#    - shell: bash
+#      env:
+#        STATUS: ${{ inputs.STATUS }}
+#        WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
+#        REPO: ${{ inputs.REPO }}
+#        REPO_URL: ${{ inputs.REPO_URL }}
+#        WORKFLOW_URL: ${{ inputs.WORKFLOW_URL }}
+#        BRANCH: ${{ inputs.BRANCH }}
+#        COMMIT_USER: ${{ inputs.COMMIT_USER }}
+#        COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
+#        COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
+#      run: |
+#        chmod +x notice.sh
+#        ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
