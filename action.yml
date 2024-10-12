@@ -46,6 +46,10 @@ runs:
   steps:
     - name: Notice actions
       shell: bash
+      run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+
+    - name: Notice actions
+      shell: bash
       env:
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
@@ -58,5 +62,5 @@ runs:
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
       run: |
         ls
-        chmod +x ./notice.sh
+        chmod +x notice.sh
         # ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
