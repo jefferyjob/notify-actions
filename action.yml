@@ -58,5 +58,5 @@ runs:
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
       run: |
         ls
-        ./chmod +x notice.sh
+        chmod +x ./notice.sh
         # ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
