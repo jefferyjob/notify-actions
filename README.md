@@ -2,13 +2,31 @@
 A GitHub Action to send notifications to various messaging platforms (e.g., Feishu, DingTalk, Work WeChat, ShowDoc) based on deployment status.
 
 ## Features
-
 - Supports multiple notification types.
 - Allows sending messages in various formats (text, markdown, card).
 - Can be used to notify about deployment statuses, making it easy to integrate into CI/CD pipelines.
 - Customizable to fit different repository and workflow requirements.
 
-## Inputs
+## Example Workflow
+
+```yaml
+- name: Send Notification
+  uses: jefferyjob@notice-actions@v1
+  with:
+    NOTICE_TYPE: ''
+    MSG_TYPE: ''
+    STATUS: ''
+    WEBHOOK_URL: ''
+    REPO: ''
+    REPO_URL: ''
+    WORKFLOW_URL: ''
+    BRANCH: ''
+    COMMIT_USER: ''
+    COMMIT_SHA: ''
+    COMMIT_MESSAGE: ''
+```
+
+## Parameter configuration
 | Variable name | Required | Description |
 | ------------ | -------- | --------------------- |
 | NOTICE_TYPE | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`). |
@@ -23,50 +41,6 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 | COMMIT_SHA | No | The Git hash value of the submission, used to uniquely identify the specific submission version, for easy tracking and rollback (e.g., `a1b2c3d`). |
 | COMMIT_MESSAGE | No | Commit message, recording the comments when this code is submitted, to facilitate understanding of the purpose and background of the code change. |
 
-## Example Workflow
-
-Here's an example of how to use this action in your GitHub workflow:
-
-```yaml
-name: Deploy Notification
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  notify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Determine Branch
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
-          else
-            echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-          fi
-
-      - name: Send Notification
-        uses: ./ # Use local action
-        with:
-          NOTICE_TYPE: 'feishu'
-          MSG_TYPE: 'text'
-          STATUS: '1'
-          WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
-          REPO: ${{ github.repository }}
-          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
-          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          BRANCH: ${{ env.BRANCH }}
-          COMMIT_USER: ${{ github.event.head_commit.author.name }}
-          COMMIT_SHA: ${{ github.sha }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-```
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
