@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/auto_get_env
   pull_request:
     branches:
       - main

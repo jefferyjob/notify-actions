@@ -44,18 +44,34 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Auto get env
+      shell: bash
+      run: |
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+        else
+          echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+        fi
+
     - name: Notice actions
       shell: bash
       env:
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
-        REPO: ${{ inputs.REPO }}
-        REPO_URL: ${{ inputs.REPO_URL }}
-        WORKFLOW_URL: ${{ inputs.WORKFLOW_URL }}
-        BRANCH: ${{ inputs.BRANCH }}
-        COMMIT_USER: ${{ inputs.COMMIT_USER }}
-        COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
-        COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
+#        REPO: ${{ inputs.REPO }}
+#        REPO_URL: ${{ inputs.REPO_URL }}
+#        WORKFLOW_URL: ${{ inputs.WORKFLOW_URL }}
+#        BRANCH: ${{ inputs.BRANCH }}
+#        COMMIT_USER: ${{ inputs.COMMIT_USER }}
+#        COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
+#        COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
+        REPO: ${{ github.repository }}
+        REPO_URL: ${{ github.event.repository.html_url }}
+        WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        BRANCH: ${{ env.BRANCH }}
+        COMMIT_USER: ${{ github.actor }}
+        COMMIT_SHA: ${{ github.sha }}
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       run: |
         chmod +x $GITHUB_ACTION_PATH/notice.sh
         $GITHUB_ACTION_PATH/notice.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
