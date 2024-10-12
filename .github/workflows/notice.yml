@@ -17,6 +17,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Print GitHub context
+        run: |
+          echo "github 信息"
+          echo "${{ toJson(github) }}"
+          echo "env 信息"
+          echo "${{ toJson(env) }}"
+
       - name: Get Branch
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
