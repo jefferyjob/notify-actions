@@ -1,0 +1,44 @@
+name: 'Notification Action'
+description: 'A GitHub Action to send notifications'
+author: 'jefferyjob <58850169@qq.com>'
+inputs:
+  NOTICE_TYPE:
+    description: 'Type of notification (e.g., feishu, dingtalk, workWechat, showDoc)'
+    required: true
+  MSG_TYPE:
+    description: 'Message format (e.g., text, markdown, card)'
+    required: true
+  STATUS:
+    description: 'Deployment status, 1 means success, 0 means failure, multiple statuses can be spliced and passed, for example: 1101'
+    required: true
+  WEBHOOK_URL:
+    description: 'Webhook URL for the notification service'
+    required: true
+  REPO:
+    description: 'Repository name in the format "organization/repo"'
+    required: true
+  REPO_URL:
+    description: 'Repository URL pointing to the source code'
+    required: true
+  WORKFLOW_URL:
+    description: 'URL of the deployment pipeline'
+    required: true
+  BRANCH:
+    description: 'Branch being deployed (default is main)'
+    required: false
+  COMMIT_USER:
+    description: 'The author who committed the changes'
+    required: false
+  COMMIT_SHA:
+    description: 'Git SHA hash of the commit'
+    required: false
+  COMMIT_MESSAGE:
+    description: 'Commit message for the changes'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        ./notify.sh ${{ inputs.webhook_url }} "${{ inputs.message }}"
+      shell: bash
