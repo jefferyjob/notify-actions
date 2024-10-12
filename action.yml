@@ -40,5 +40,5 @@ runs:
   using: 'composite'
   steps:
     - run: |
-        ./notify.sh ${{ inputs.webhook_url }} "${{ inputs.message }}"
+        ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
       shell: bash
