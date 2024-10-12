@@ -40,5 +40,6 @@ runs:
   using: 'composite'
   steps:
     - run: |
+        chmod +x notice.sh
         ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
       shell: bash
