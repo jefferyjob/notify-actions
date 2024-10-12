@@ -1,4 +1,7 @@
 # Notification Action
+English | [简体中文](README.cn.md)
+
+## Introduction
 A GitHub Action to send notifications to various messaging platforms (e.g., Feishu, DingTalk, Work WeChat, ShowDoc) based on deployment status.
 
 ## Features
