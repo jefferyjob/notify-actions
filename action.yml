@@ -30,6 +30,7 @@ runs:
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV 
           COMMIT_MESSAGE=$(echo "${{ github.event.pull_request.title }}" | tr -d '\n')
+          COMMIT_MESSAGE="PR: $COMMIT_MESSAGE"
         else
           echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
           COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | tr -d '\n')
