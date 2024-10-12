@@ -5,7 +5,7 @@ v1: ## 推送v1标签
 	git push origin v1
 
 .PHONY:dev
-dev: ## 推送开发者标签
+dev: ## 推送dev标签
 	git tag -d dev || true
 	git tag	dev -m "developer testing"
 	git push origin dev --force
