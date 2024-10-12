@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/1012_notice
   pull_request:
     branches:
       - main
