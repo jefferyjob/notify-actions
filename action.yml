@@ -1,6 +1,11 @@
 name: 'Notification Action'
 description: 'A GitHub Action to send notifications'
 author: 'jefferyjob <58850169@qq.com>'
+
+branding:
+  icon: 'activity'
+  color: 'green'
+
 inputs:
   NOTICE_TYPE:
     description: 'Type of notification (e.g., feishu, dingtalk, workWechat, showDoc)'
