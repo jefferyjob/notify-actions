@@ -58,4 +58,4 @@ runs:
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
       run: |
         chmod +x $GITHUB_ACTION_PATH/notice.sh
-        ./$GITHUB_ACTION_PATH/notice.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
+        $GITHUB_ACTION_PATH/notice.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
