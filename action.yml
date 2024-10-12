@@ -46,7 +46,6 @@ runs:
   steps:
     - name: Notice actions
       shell: bash
-      run: ls && chmod +x notice.sh && ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
       env:
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
@@ -57,3 +56,7 @@ runs:
         COMMIT_USER: ${{ inputs.COMMIT_USER }}
         COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
+      run: |
+        ls
+        chmod +x notice.sh
+        ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
