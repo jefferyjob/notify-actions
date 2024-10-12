@@ -1,4 +1,7 @@
 # Notification Action
+[English](README.md) | 简体中文
+
+## 介绍
 GitHub 操作可根据部署状态向各种消息平台（例如，飞书、钉钉、企业微信、ShowDoc）发送通知。
 
 ## 功能
