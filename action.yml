@@ -44,7 +44,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Notice actions
+    - name: Action Path
       shell: bash
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH
 
