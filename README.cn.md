@@ -20,13 +20,6 @@ GitHub 操作可根据部署状态向各种消息平台（例如，飞书、钉�
     MSG_TYPE: ''
     STATUS: ''
     WEBHOOK_URL: ''
-    REPO: ''
-    REPO_URL: ''
-    WORKFLOW_URL: ''
-    BRANCH: ''
-    COMMIT_USER: ''
-    COMMIT_SHA: ''
-    COMMIT_MESSAGE: ''
 ```
 
 ## 参数配置

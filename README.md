@@ -20,13 +20,6 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
     MSG_TYPE: ''
     STATUS: ''
     WEBHOOK_URL: ''
-    REPO: ''
-    REPO_URL: ''
-    WORKFLOW_URL: ''
-    BRANCH: ''
-    COMMIT_USER: ''
-    COMMIT_SHA: ''
-    COMMIT_MESSAGE: ''
 ```
 
 ## Parameter configuration
