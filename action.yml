@@ -65,4 +65,5 @@ runs:
         COMMIT_USER: ${{ inputs.COMMIT_USER }}
         COMMIT_SHA: ${{ inputs.COMMIT_SHA }}
         COMMIT_MESSAGE: ${{ inputs.COMMIT_MESSAGE }}
-      run: chmod +x notice.sh && ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
+      run: |
+        chmod +x ./notice.sh && ./notice.sh "${{ inputs.NOTICE_TYPE }}" "${{ inputs.MSG_TYPE }}"
