@@ -10,9 +10,9 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 
 ## Inputs
 | Variable name | Required | Description |
-| ---------------- | -------- | --------------------- |
-| `NOTICE_TYPE` | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`). |
-| `MSG_TYPE` | Yes | Message format (such as `text`, `markdown`, `card`). |
+| ------------ | -------- | --------------------- |
+| NOTICE_TYPE | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`). |
+| MSG_TYPE | Yes | Message format (such as `text`, `markdown`, `card`). |
 | STATUS | Yes | Deployment status, `1` indicates success, `0` indicates failure, used to identify whether this deployment is successful. |
 | WEBHOOK_URL | Yes | Webhook address of notification service, used to send deployment notifications to platforms such as Feishu and DingTalk. |
 | REPO | Yes | Repository name, which identifies the name of the current project, usually used to distinguish different applications or services (such as: `organizations/repo`). |
