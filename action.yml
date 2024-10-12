@@ -48,6 +48,11 @@ runs:
       shell: bash
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH
 
+    - name: Tests
+      shell: bash
+      run: |
+        ls
+
     - name: Notice actions
       shell: bash
       env:
