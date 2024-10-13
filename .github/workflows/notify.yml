@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing  # 指定环境
     steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Send Notification
         uses: ./ # 使用本地 Action
