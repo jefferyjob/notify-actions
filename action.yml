@@ -29,15 +29,15 @@ runs:
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
-          COMMIT_MESSAGE="PR: ${{ github.event.pull_request.title }}"
+          # COMMIT_MESSAGE="PR: ${{ github.event.pull_request.title }}"
+          COMMIT_MESSAGE=$(echo "${{ github.event.pull_request.title }}" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g')
+          COMMIT_MESSAGE="PR: $COMMIT_MESSAGE"
         else
           echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          # COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g')
         fi
         
-        # COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g')
-        COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/["()\\]//g' -e 's/[[:punct:]]//g')
-
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
     - name: Notify actions
