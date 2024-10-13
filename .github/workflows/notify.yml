@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing  # 指定环境
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#      - name: Checkout code
+#        uses: actions/checkout@v4
 
       - name: Send Notification
         uses: ./ # 使用本地 Action
@@ -24,3 +24,10 @@ jobs:
           WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
           STATUS: '1' # 部署状态，'1' 表示成功，'0' 表示失败
 
+      - name: Send Card Notification
+        uses: jefferyjob/notify-actions@dev
+        with:
+          NOTICE_TYPE: 'feishu'
+          MSG_TYPE: 'card'
+          WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
+          STATUS: '1'
