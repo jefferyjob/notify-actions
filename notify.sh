@@ -4,6 +4,18 @@ set -e
 NOTICE_TYPE="$1"
 MSG_TYPE="$2"
 
+
+if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+  echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+  COMMIT_MESSAGE=$(echo "${{ github.event.pull_request.title }}" | head -n 1 | tr -d '\n' | sed -e 's/["()\\]//g' -e 's/[[:punct:]]//g')
+  COMMIT_MESSAGE="PR: $COMMIT_MESSAGE"
+else
+  COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | head -n 1 | tr -d '\n' | sed -e 's/["()\\]//g' -e 's/[[:punct:]]//g')
+fi
+echo $COMMIT_MESSAGE
+exit 1
+
+
 print_usage() {
   echo "Usage: $0 <NOTICE_TYPE> <MSG_TYPE>"
   echo ""
