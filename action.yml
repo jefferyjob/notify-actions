@@ -28,12 +28,11 @@ runs:
       shell: bash
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV 
-          COMMIT_MESSAGE=$(echo "${{ github.event.pull_request.title }}" | tr -d '\n')
-          COMMIT_MESSAGE="PR: $COMMIT_MESSAGE"
+          echo "BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+          COMMIT_MESSAGE="PR: ${{ github.event.pull_request.title }}"
         else
           echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-          COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | tr -d '\n')
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
         fi
         
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
