@@ -35,6 +35,7 @@ runs:
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
         fi
         
+        COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g')
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
     - name: Notify actions
