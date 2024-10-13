@@ -1,4 +1,4 @@
-# Notification Action
+# Notification Actions
 [English](README.en.md) | 简体中文
 
 ## 介绍
@@ -14,7 +14,7 @@ GitHub 操作可根据部署状态向各种消息平台（例如，飞书、钉�
 
 ```yaml
 - name: Send Notification
-  uses: jefferyjob/notice-actions@v1
+  uses: jefferyjob/notify-actions@v1
   with:
     NOTICE_TYPE: ''
     MSG_TYPE: ''
