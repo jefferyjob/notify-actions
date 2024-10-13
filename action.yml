@@ -38,7 +38,7 @@ runs:
         
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
-    - name: Notice actions
+    - name: Notify actions
       shell: bash
       env:
         STATUS: ${{ inputs.STATUS }}
@@ -51,5 +51,5 @@ runs:
         COMMIT_SHA: ${{ github.sha }}
         COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
       run: |
-        chmod +x $GITHUB_ACTION_PATH/notice.sh
-        $GITHUB_ACTION_PATH/notice.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
+        chmod +x $GITHUB_ACTION_PATH/notify.sh
+        $GITHUB_ACTION_PATH/notify.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}

@@ -1,4 +1,4 @@
-# Notification Action
+# Notification Actions
 English | [简体中文](README.md)
 
 ## Introduction
@@ -14,7 +14,7 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 
 ```yaml
 - name: Send Notification
-  uses: jefferyjob/notice-actions@v1
+  uses: jefferyjob/notify-actions@v1
   with:
     NOTICE_TYPE: ''
     MSG_TYPE: ''

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - fix/commit_msg
   pull_request:
     branches:
       - main
