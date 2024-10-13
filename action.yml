@@ -50,7 +50,7 @@ runs:
         COMMIT_USER: ${{ github.actor }}
         COMMIT_SHA: ${{ github.sha }}
         COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
-      working-directory: $GITHUB_ACTION_PATH
+      working-directory: "$GITHUB_ACTION_PATH"
       run: |
         chmod +x notify.sh
         ./notify.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
