@@ -40,7 +40,6 @@ print_env() {
   echo "  COMMIT_USER: $COMMIT_USER"
   echo "  COMMIT_MESSAGE: $COMMIT_MESSAGE"
   echo "  WORKFLOW_URL: $WORKFLOW_URL"
-  echo "  TRIGGER_TIME: $TRIGGER_TIME"
   echo "--------------------------------------------------------------------------"
   echo "  NOTICE_TYPE: $NOTICE_TYPE"
   echo "  MSG_TYPE: $MSG_TYPE"
@@ -72,7 +71,8 @@ if [[ "$MSG_TYPE" != "text" && "$MSG_TYPE" != "markdown" && "$MSG_TYPE" != "card
 fi
 
 # 环境变量
-COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | tr -d '\n')
+#COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | tr -d '\n') # 删除换行
+COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n') # 删除换行且保留第一行
 
 check_param() {
   local param_name="$1"
