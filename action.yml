@@ -27,15 +27,10 @@ runs:
     - name: Auto get env
       shell: bash
       run: |
-        # 逐步行分析错误
         COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-        # 检查 pull_request.title 内容
         echo "$COMMIT_MESSAGE"
-        # 单独调试 head 命令
         echo "$COMMIT_MESSAGE" | head -n 1
-        # 单独调试 tr 命令
         echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n'
-        # 最终加入 sed 命令
         echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[\"'"'"']//g' -e 's/[()\\]//g' -e 's/[[:punct:]]//g'
 
     - name: Notify actions
