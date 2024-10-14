@@ -42,7 +42,7 @@ runs:
           # COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | head -n 1 | tr -d '\n' | sed -e 's/[\"'\'']//g' -e 's/[()\\]//g' -e 's/[[:punct:]]//g')
           COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | \
             head -n 1 | tr -d '\n' | \
-            sed -e 's/[\"'"'"']//g' -e 's/[()\\]//g' -e 's/[[:punct:]]//g')
+            sed -e 's/["'"'"']//g' -e 's/[()\\]//g' -e 's/[[:punct:]]//g')
         fi
         
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
