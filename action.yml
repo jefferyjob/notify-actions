@@ -42,9 +42,8 @@ runs:
           COMMIT_MESSAGE="$COMMIT_MESSAGE"
         fi
         
-        COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()#\n')
-        # COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[\"'\'']//g' -e 's/[()\\]//g' -e 's/[^a-zA-Z0-9: ]//g')
-
+        COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()#\n')
+        
         echo "BRANCH=$BRANCH" >> $GITHUB_ENV
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
