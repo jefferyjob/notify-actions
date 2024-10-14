@@ -24,7 +24,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Auto get env
+    - name: Environment variable formatting
       shell: bash
       env:
         # pull request
