@@ -36,7 +36,7 @@ runs:
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           BRANCH="$PR_BRANCH"
-          COMMIT_MESSAGE="$PR_COMMIT_MESSAGE"
+          COMMIT_MESSAGE="PR: $PR_COMMIT_MESSAGE"
         else
           BRANCH="$BRANCH"
           COMMIT_MESSAGE="$COMMIT_MESSAGE"
