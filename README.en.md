@@ -23,12 +23,12 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 ```
 
 ## Parameter configuration
-| Variable name | Required | Description |
-| ------------ | -------- | --------------------- |
-| NOTICE_TYPE | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`). |
-| MSG_TYPE | Yes | Message format (such as `text`, `markdown`, `card`). |
-| STATUS | Yes | Deployment status, `1` indicates success, `0` indicates failure, used to identify whether this deployment is successful. |
-| WEBHOOK_URL | Yes | Webhook address of notification service, used to send deployment notifications to platforms such as Feishu and DingTalk. |
+| Variable name | Required | Description                                                                                                                                   |
+| ------------ | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------|
+| NOTICE_TYPE | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`).                                                                    |
+| MSG_TYPE | Yes | Message format (such as `text`, `markdown`, `card`).                                                                                          |
+| STATUS | Yes | Deployment status, `1` or `true` indicates success, `0` or `false` indicates failure, used to identify whether this deployment is successful. |
+| WEBHOOK_URL | Yes | Webhook address of notification service, used to send deployment notifications to platforms such as Feishu and DingTalk.                      |
 
 ## Notification type support
 |            | text | markdown | Card |
