@@ -58,7 +58,7 @@ runs:
         BRANCH: ${{ env.BRANCH }}
         COMMIT_USER: ${{ github.actor }}
         COMMIT_SHA: ${{ github.sha }}
-        # COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+        COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
       run: |
         chmod +x $GITHUB_ACTION_PATH/notify.sh
         $GITHUB_ACTION_PATH/notify.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
