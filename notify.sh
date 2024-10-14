@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+
 NOTICE_TYPE="$1"
 MSG_TYPE="$2"
 
@@ -33,6 +34,9 @@ print_env() {
   echo "--------------------------------------------------------------------------"
   echo "  Shell Notification < Initialization Parameters >"
   echo "--------------------------------------------------------------------------"
+  echo "  NOTICE_TYPE: $NOTICE_TYPE"
+  echo "  MSG_TYPE: $MSG_TYPE"
+  echo "--------------------------------------------------------------------------"
   echo "  STATUS: $STATUS"
   echo "  REPO: $REPO"
   echo "  REPO_URL: $REPO_URL"
@@ -40,10 +44,6 @@ print_env() {
   echo "  COMMIT_USER: $COMMIT_USER"
   echo "  COMMIT_MESSAGE: $COMMIT_MESSAGE"
   echo "  WORKFLOW_URL: $WORKFLOW_URL"
-  echo "  TRIGGER_TIME: $TRIGGER_TIME"
-  echo "--------------------------------------------------------------------------"
-  echo "  NOTICE_TYPE: $NOTICE_TYPE"
-  echo "  MSG_TYPE: $MSG_TYPE"
   echo "--------------------------------------------------------------------------"
 }
 
@@ -71,8 +71,8 @@ if [[ "$MSG_TYPE" != "text" && "$MSG_TYPE" != "markdown" && "$MSG_TYPE" != "card
   exit 1
 fi
 
-# 环境变量
-COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | tr -d '\n')
+# 用户提交的 commit message 消息特殊字符处理
+COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()\n')
 
 check_param() {
   local param_name="$1"
