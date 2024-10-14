@@ -74,7 +74,8 @@ fi
 # 用户提交的 commit message 消息特殊字符处理
 #COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | tr -d '\n') # 删除换行
 #COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n') # 删除换行且保留第一行
-COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g') # 删除所有特殊字符
+#COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[[:punct:]]//g') # 删除所有特殊字符
+COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()#\n')
 
 check_param() {
   local param_name="$1"
