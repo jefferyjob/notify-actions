@@ -23,12 +23,12 @@ GitHub 操作可根据部署状态向各种消息平台（例如，飞书、钉�
 ```
 
 ## 参数配置
-| 变量名称 | 必需 | 说明 |
-| ------------ | -------- | --------------------- |
-| NOTICE_TYPE | 是 |通知类型（如 `feishu`、`dingtalk`、`workWechat`、`showDoc`）。|
-| MSG_TYPE | 是 | 消息格式（如 `text`、`markdown`、`card`）。|
-| STATUS     | 是    | 部署状态，`1` 表示成功，`0` 表示失败，用于标识本次部署是否成功。                                        |
-| WEBHOOK_URL | 是    | 通知服务的 Webhook 地址，用于向如飞书、钉钉等平台发送部署通知。                                        |
+| 变量名称 | 必需 | 说明                                                      |
+| ------------ | -------- |---------------------------------------------------------|
+| NOTICE_TYPE | 是 | 通知类型（如 `feishu`、`dingtalk`、`workWechat`、`showDoc`）。     |
+| MSG_TYPE | 是 | 消息格式（如 `text`、`markdown`、`card`）。                       |
+| STATUS     | 是    | 部署状态，`1` 或 `true` 表示成功，`0` 或 `false` 表示失败，用于标识本次部署是否成功。 |
+| WEBHOOK_URL | 是    | 通知服务的 Webhook 地址，用于向如飞书、钉钉等平台发送部署通知。                    |
 
 ## 通知类型支持
 |            | text | markdown | Card |

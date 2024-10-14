@@ -90,12 +90,7 @@ check_param "REPO" "$REPO"
 check_param "REPO_URL" "$REPO_URL"
 check_param "WORKFLOW_URL" "$WORKFLOW_URL"
 
-if [[ "$STATUS" != "1" && "$STATUS" != "0" ]]; then
-  echo "Error: 参数 STATUS 必须是 0 或者 1"
-  exit 1
-fi
-
-if [[ "$STATUS" == "1" ]]; then
+if [[ "$STATUS" == "1" || "$STATUS" == "true" ]]; then
   STATUS_MSG="成功"
   CONTENT_TITLE="部署成功通知"
   COLOR="green"

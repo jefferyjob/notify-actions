@@ -30,4 +30,4 @@ jobs:
           NOTICE_TYPE: 'feishu'
           MSG_TYPE: 'card'
           WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
-          STATUS: '1'
+          STATUS: "true"
