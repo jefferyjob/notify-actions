@@ -72,7 +72,7 @@ if [[ "$MSG_TYPE" != "text" && "$MSG_TYPE" != "markdown" && "$MSG_TYPE" != "card
 fi
 
 # 用户提交的 commit message 消息特殊字符处理
-COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()#\n')
+COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()\n')
 
 check_param() {
   local param_name="$1"
