@@ -27,7 +27,7 @@ runs:
     - name: Auto get env
       shell: bash
       env:
-        COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       run: |
         COMMIT_MESSAGE="$COMMIT_MESSAGE"
         #echo "$COMMIT_MESSAGE"
