@@ -30,9 +30,9 @@ runs:
         COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
       run: |
         COMMIT_MESSAGE="$COMMIT_MESSAGE"
-        echo "$COMMIT_MESSAGE"
-        echo "$COMMIT_MESSAGE" | head -n 1
-        echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n'
+        #echo "$COMMIT_MESSAGE"
+        #echo "$COMMIT_MESSAGE" | head -n 1
+        #echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n'
         echo "$COMMIT_MESSAGE" | head -n 1 | tr -d '\n' | sed -e 's/[\"'"'"']//g' -e 's/[()\\]//g' -e 's/[[:punct:]]//g'
 
     - name: Notify actions
