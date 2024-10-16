@@ -25,6 +25,8 @@ jobs:
           echo "Simulate CD process"
 
   notify:
+    if: ${{ always() }}
+    needs: [ build, deploy ]
     runs-on: ubuntu-latest
     environment: testing
     steps:
