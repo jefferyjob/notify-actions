@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to server
+      - name: Build to container
         run: |
           echo "Simulate CI process"
 
