@@ -1,0 +1,47 @@
+name: Notify Actions Example
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        run: |
+          echo "Simulate CI process"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        run: |
+          echo "Simulate CD process"
+
+  notify:
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+      - name: Send Success Notification
+        if: ${{ needs.build.result == 'success' && needs.deploy.result == 'success' }}
+        uses: jefferyjob/notify-actions@v1
+        with:
+          NOTICE_TYPE: 'feishu'
+          MSG_TYPE: 'card'
+          WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
+          STATUS: "true"
+
+      - name: Send Failure Notification
+        if: ${{ needs.build.result != 'success' || needs.deploy.result != 'success' }}
+        uses: jefferyjob/notify-actions@v1
+        with:
+          NOTICE_TYPE: 'feishu'
+          MSG_TYPE: 'card'
+          WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK }}
+          STATUS: "false"
