@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-NOTICE_TYPE="$1"
-MSG_TYPE="$2"
+NOTICE_TYPE=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+MSG_TYPE=$(echo "$2" | tr '[:upper:]' '[:lower:]')
 
 print_usage() {
   echo "Usage: $0 <NOTICE_TYPE> <MSG_TYPE>"
@@ -60,7 +60,7 @@ if [ "$#" -lt 2 ]; then
 fi
 
 # 检查服务器授权方式
-if [[ "$NOTICE_TYPE" != "feishu" && "$NOTICE_TYPE" != "dingtalk" && "$NOTICE_TYPE" != "workWechat" && "$NOTICE_TYPE" != "showDoc" ]]; then
+if [[ "$NOTICE_TYPE" != "feishu" && "$NOTICE_TYPE" != "dingtalk" && "$NOTICE_TYPE" != "workwechat" && "$NOTICE_TYPE" != "showdoc" ]]; then
   echo "Error: NOTICE_TYPE parameter validation error."
   exit 1
 fi
@@ -421,7 +421,7 @@ case $NOTICE_TYPE in
       exit 1
     fi
     ;;
-  workWechat) # 企业微信
+  workwechat) # 企业微信
     if [[ "$MSG_TYPE" == "text" ]]; then
       notice_workWechat_text
     elif [[ "$MSG_TYPE" == "markdown" ]]; then
@@ -431,7 +431,7 @@ case $NOTICE_TYPE in
       exit 1
     fi
     ;;
-  showDoc) # showDoc
+  showdoc) # showDoc
     if [[ "$MSG_TYPE" == "text" ]]; then
       notice_showdoc_text
     elif [[ "$MSG_TYPE" == "markdown" ]]; then
