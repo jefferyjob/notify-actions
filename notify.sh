@@ -38,10 +38,12 @@ print_env() {
   echo "  MSG_TYPE: $MSG_TYPE"
   echo "--------------------------------------------------------------------------"
   echo "  STATUS: $STATUS"
+  echo "  WEBHOOK_URL: $WEBHOOK_URL"
   echo "  REPO: $REPO"
   echo "  REPO_URL: $REPO_URL"
   echo "  BRANCH: $BRANCH"
   echo "  COMMIT_USER: $COMMIT_USER"
+  echo "  COMMIT_SHA: $COMMIT_SHA"
   echo "  COMMIT_MESSAGE: $COMMIT_MESSAGE"
   echo "  WORKFLOW_URL: $WORKFLOW_URL"
   echo "--------------------------------------------------------------------------"
@@ -100,6 +102,8 @@ else
   COLOR="red"
 fi
 
+# sha 信息获取前面7位
+COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
 
 ######################################################################
 # 文本通知
