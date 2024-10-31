@@ -38,5 +38,14 @@ GitHub 操作可根据部署状态向各种消息平台（例如，飞书、钉�
 | workWechat | √    | √       | ×    |
 | showDoc    | √    | ×       | ×    |
 
+## 飞书通知示意图
+**项目部署成功通知**
+
+![success](static/success.png)
+
+**项目部署失败通知**
+
+![failed](static/failed.png)
+
 ## 许可证
 This project is licensed under the [MIT License](LICENSE).

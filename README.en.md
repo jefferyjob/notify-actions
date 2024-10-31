@@ -38,5 +38,14 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 | workWechat | √    | √       | ×    |
 | showDoc    | √    | ×       | ×    |
 
+## Feishu notification diagram
+**Project deployment success notification**
+
+![success](static/success.png)
+
+**Project deployment failure notification**
+
+![failed](static/failed.png)
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
