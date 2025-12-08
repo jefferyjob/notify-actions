@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 
+# 传入参数转小写
 NOTICE_TYPE=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 MSG_TYPE=$(echo "$2" | tr '[:upper:]' '[:lower:]')
 
+# 帮助信息
 print_usage() {
   echo "Usage: $0 <NOTICE_TYPE> <MSG_TYPE>"
   echo ""
