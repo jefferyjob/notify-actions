@@ -15,9 +15,9 @@ export STATUS=1
 export REPO="jefferyjob/notify-actions"
 export REPO_URL="https://github.com/jefferyjob/notify-actions"
 export BRANCH="main"
-export COMMIT_USER="tester"
-export COMMIT_SHA="abcdef123456"
-export COMMIT_MESSAGE="unit test commit message"
+export COMMIT_USER="make"
+export COMMIT_SHA="e981969435cbe9e6ec31be2ea5b7477306d3d83b"
+export COMMIT_MESSAGE="Fixed parameter issues"
 export WORKFLOW_URL="https://github.com/jefferyjob/notify-actions/actions"
 
 
@@ -25,7 +25,7 @@ export WORKFLOW_URL="https://github.com/jefferyjob/notify-actions/actions"
 # 测试飞书
 export WEBHOOK_URL="${FeishuWebhookUrl}"
 ##############################################################################
-$SCRIPT feishu text
+#$SCRIPT feishu text
 #$SCRIPT feishu markdown
 #$SCRIPT feishu card
 
