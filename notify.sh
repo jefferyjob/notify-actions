@@ -111,7 +111,7 @@ COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
 # 文本通知
 ######################################################################
 TRIGGER_TIME="$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S")"
-CONTENT="$CONTENT_TITLE \n\n仓库: $REPO \n分支: $BRANCH \n作者: $COMMIT_USER \n状态: $STATUS_MSG \n信息: $COMMIT_MESSAGE \n时间: $TRIGGER_TIME \n详情: $WORKFLOW_URL "
+CONTENT="$CONTENT_TITLE \n\n仓库: $REPO \n分支: $BRANCH \n作者: $COMMIT_USER \n哈希: $COMMIT_SHA \n信息: $COMMIT_MESSAGE \n时间: $TRIGGER_TIME \n状态: $STATUS_MSG \n详情: $WORKFLOW_URL"
 
 notice_feishu_text() {
   curl -X POST "$WEBHOOK_URL" \
@@ -198,6 +198,16 @@ notice_feishu_markdown() {
                [
                  {
                    "tag": "text",
+                   "text": "作者："
+                 },
+                 {
+                   "tag": "text",
+                   "text": "'"$COMMIT_USER"'"
+                 }
+               ],
+               [
+                 {
+                   "tag": "text",
                    "text": "哈希："
                  },
                  {
@@ -213,16 +223,6 @@ notice_feishu_markdown() {
                  {
                    "tag": "text",
                    "text": "'"$COMMIT_MESSAGE"'"
-                 }
-               ],
-               [
-                 {
-                   "tag": "text",
-                   "text": "作者："
-                 },
-                 {
-                   "tag": "text",
-                   "text": "'"$COMMIT_USER"'"
                  }
                ],
                [
@@ -268,9 +268,9 @@ notice_workWechat_markdown() {
 \n
 仓库：[$REPO]($REPO_URL)
 分支：$BRANCH
-信息：$COMMIT_MESSAGE
-哈希：$COMMIT_SHA
 作者：$COMMIT_USER
+哈希：$COMMIT_SHA
+信息：$COMMIT_MESSAGE
 时间：$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S")
 状态：$STATUS_MSG
 详情：[查看流水线]($WORKFLOW_URL)"
@@ -287,7 +287,7 @@ notice_workWechat_markdown() {
 
 notice_dingtalk_markdown() {
   CONTENT="### <font color='$COLOR'>$CONTENT_TITLE</font>
-<br>仓库：[$REPO]($REPO_URL)<br>分支：$BRANCH <br>信息：$COMMIT_MESSAGE <br>哈希：$COMMIT_SHA <br>作者：$COMMIT_USER <br>时间：$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S") <br>状态：$STATUS_MSG <br>详情：[查看流水线]($WORKFLOW_URL)"
+<br>仓库：[$REPO]($REPO_URL)<br>分支：$BRANCH <br>作者：$COMMIT_USER <br>哈希：$COMMIT_SHA<br>信息：$COMMIT_MESSAGE  <br>时间：$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S") <br>状态：$STATUS_MSG <br>详情：[查看流水线]($WORKFLOW_URL)"
 
   curl -X POST "$WEBHOOK_URL" \
     -H 'Content-Type: application/json' \
@@ -305,9 +305,9 @@ notice_showdoc_markdown() {
 
 仓库：[$REPO]($REPO_URL)
 分支：$BRANCH
-信息：$COMMIT_MESSAGE
-哈希：$COMMIT_SHA
 作者：$COMMIT_USER
+哈希：$COMMIT_SHA
+信息：$COMMIT_MESSAGE
 时间：$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S")
 状态：$STATUS_MSG
 详情：[查看流水线]($WORKFLOW_URL)"
