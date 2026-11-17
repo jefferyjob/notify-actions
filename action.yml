@@ -11,54 +11,68 @@ inputs:
     description: 'Type of notification (e.g., feishu, dingtalk, workWechat, showDoc)'
     required: true
   MSG_TYPE:
-    description: 'Message format (e.g., text, markdown, card)'
+    description: 'Message format (e.g., text, markdown, card; card is feishu only)'
     required: true
   STATUS:
-    description: 'Deployment status, 1 means success, 0 means failure'
+    description: 'Deployment status: 1 or true means success, 0 or false means failure'
     required: true
   WEBHOOK_URL:
     description: 'Webhook URL for the notification service'
     required: true
+  FAIL_ON_ERROR:
+    description: 'Fail the action when the notification fails to send (default: false)'
+    required: false
+    default: 'false'
+  TIMEZONE:
+    description: 'Timezone used for the notification time, e.g. Asia/Shanghai (default: Asia/Shanghai)'
+    required: false
+    default: 'Asia/Shanghai'
 
 
 runs:
   using: 'composite'
   steps:
-    - name: Environment variable formatting
-      shell: bash
-      env:
-        # pull request
-        PR_BRANCH: ${{ github.head_ref }}
-        PR_COMMIT_MESSAGE: ${{ github.event.pull_request.title }}
-        # commit
-        BRANCH: ${{ github.ref_name }}
-        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-      run: |
-        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          BRANCH="$PR_BRANCH"
-          COMMIT_MESSAGE="PR: $PR_COMMIT_MESSAGE"
-        else
-          BRANCH="$BRANCH"
-          COMMIT_MESSAGE="$COMMIT_MESSAGE"
-        fi
-        
-        COMMIT_MESSAGE=$(printf "%s" "$COMMIT_MESSAGE" | head -n 1 | tr -d '"()\n')
-        
-        echo "BRANCH=$BRANCH" >> $GITHUB_ENV
-        echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
-
+    # 注意：所有 input 均通过 env 传入脚本，禁止使用 ${{ inputs.* }} 内插到
+    # run 命令中，否则 fork PR 可通过自定义 input 值注入任意 shell 命令。
     - name: Notify actions
       shell: bash
       env:
+        # inputs
+        NOTICE_TYPE: ${{ inputs.NOTICE_TYPE }}
+        MSG_TYPE: ${{ inputs.MSG_TYPE }}
         STATUS: ${{ inputs.STATUS }}
         WEBHOOK_URL: ${{ inputs.WEBHOOK_URL }}
+        FAIL_ON_ERROR: ${{ inputs.FAIL_ON_ERROR }}
+        TIMEZONE: ${{ inputs.TIMEZONE }}
+        # pull request 上下文
+        PR_BRANCH: ${{ github.head_ref }}
+        PR_COMMIT_MESSAGE: ${{ github.event.pull_request.title }}
+        PR_COMMIT_USER: ${{ github.event.pull_request.user.login }}
+        PR_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+        # push 上下文
+        PUSH_BRANCH: ${{ github.ref_name }}
+        PUSH_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        PUSH_COMMIT_USER: ${{ github.actor }}
+        PUSH_COMMIT_SHA: ${{ github.sha }}
+        # 公共上下文
+        EVENT_NAME: ${{ github.event_name }}
         REPO: ${{ github.repository }}
         REPO_URL: ${{ github.event.repository.html_url }}
         WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        BRANCH: ${{ env.BRANCH }}
-        COMMIT_USER: ${{ github.actor }}
-        COMMIT_SHA: ${{ github.sha }}
-        COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
       run: |
-        chmod +x $GITHUB_ACTION_PATH/notify.sh
-        $GITHUB_ACTION_PATH/notify.sh ${{ inputs.NOTICE_TYPE }} ${{ inputs.MSG_TYPE }}
+        # 根据触发方式选择仓库信息（PR 显示源分支、PR 标题、PR 作者与 PR head sha）
+        if [[ "$EVENT_NAME" == "pull_request" ]]; then
+          BRANCH="$PR_BRANCH"
+          COMMIT_MESSAGE="PR: $PR_COMMIT_MESSAGE"
+          COMMIT_USER="${PR_COMMIT_USER:-$PUSH_COMMIT_USER}"
+          COMMIT_SHA="${PR_COMMIT_SHA:-$PUSH_COMMIT_SHA}"
+        else
+          BRANCH="$PUSH_BRANCH"
+          COMMIT_MESSAGE="$PUSH_COMMIT_MESSAGE"
+          COMMIT_USER="$PUSH_COMMIT_USER"
+          COMMIT_SHA="$PUSH_COMMIT_SHA"
+        fi
+        export BRANCH COMMIT_MESSAGE COMMIT_USER COMMIT_SHA
+
+        chmod +x "$GITHUB_ACTION_PATH/notify.sh"
+        "$GITHUB_ACTION_PATH/notify.sh" "$NOTICE_TYPE" "$MSG_TYPE"
