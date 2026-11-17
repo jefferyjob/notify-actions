@@ -41,11 +41,11 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 ## Feishu notification diagram
 **Project deployment success notification**
 
-![success](static/success.png)
+![success](.github/assets/success.png)
 
 **Project deployment failure notification**
 
-![failed](static/failed.png)
+![failed](.github/assets/failed.png)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
