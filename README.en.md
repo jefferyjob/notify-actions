@@ -20,15 +20,19 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
     MSG_TYPE: ''
     STATUS: ''
     WEBHOOK_URL: ''
+    # FAIL_ON_ERROR: 'false'       # Optional, fail the action when the notification fails to send, default false
+    # TIMEZONE: 'Asia/Shanghai'    # Optional, timezone used for the notification time, default Asia/Shanghai
 ```
 
 ## Parameter configuration
 | Variable name | Required | Description                                                                                                                                   |
 | ------------ | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------|
 | NOTICE_TYPE | Yes | Notification type (such as `feishu`, `dingtalk`, `workWechat`, `showDoc`).                                                                    |
-| MSG_TYPE | Yes | Message format (such as `text`, `markdown`, `card`).                                                                                          |
+| MSG_TYPE | Yes | Message format (such as `text`, `markdown`, `card`; `card` is only supported by `feishu`).                                                    |
 | STATUS | Yes | Deployment status, `1` or `true` indicates success, `0` or `false` indicates failure, used to identify whether this deployment is successful. |
-| WEBHOOK_URL | Yes | Webhook address of notification service, used to send deployment notifications to platforms such as Feishu and DingTalk.                      |
+| WEBHOOK_URL | Yes | Webhook address of notification service, used to send deployment notifications to platforms such as Feishu and DingTalk. Passing it via secrets is recommended. |
+| FAIL_ON_ERROR | No | Fail the action when the notification fails to send (network error or HTTP 4xx/5xx). Default `false` (warn and continue).                    |
+| TIMEZONE | No | Timezone used for the notification time, e.g. `Asia/Shanghai`. Default `Asia/Shanghai`.                                                       |
 
 ## Notification type support
 |            | text | markdown | Card |
@@ -36,7 +40,7 @@ A GitHub Action to send notifications to various messaging platforms (e.g., Feis
 | feishu     | √    | √       | √    |
 | dingtalk   | √    | √       | ×    |
 | workWechat | √    | √       | ×    |
-| showDoc    | √    | ×       | ×    |
+| showDoc    | √    | √       | ×    |
 
 ## Feishu notification diagram
 **Project deployment success notification**

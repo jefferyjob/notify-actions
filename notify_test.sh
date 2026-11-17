@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-# 被测试脚本
+# SCRIPT 用于下方的手动测试命令
+# shellcheck disable=SC2034
 SCRIPT="./notify.sh"
 
 # 测试前赋予权限
@@ -23,6 +24,7 @@ export WORKFLOW_URL="https://github.com/jefferyjob/notify-actions/actions"
 
 ##############################################################################
 # 测试飞书
+# shellcheck disable=SC2154  # WEBHOOK_URL 由本机环境变量提供
 export WEBHOOK_URL="${FeishuWebhookUrl}"
 ##############################################################################
 #$SCRIPT feishu text
@@ -32,6 +34,7 @@ export WEBHOOK_URL="${FeishuWebhookUrl}"
 
 ##############################################################################
 # 测试钉钉
+# shellcheck disable=SC2154  # WEBHOOK_URL 由本机环境变量提供
 export WEBHOOK_URL="${DingTalkWebhookUrl}"
 ##############################################################################
 #$SCRIPT dingtalk text
@@ -40,6 +43,7 @@ export WEBHOOK_URL="${DingTalkWebhookUrl}"
 
 ##############################################################################
 # 测试企业微信
+# shellcheck disable=SC2154  # WEBHOOK_URL 由本机环境变量提供
 export WEBHOOK_URL="${WorkWechatWebhookUrl}"
 ##############################################################################
 #$SCRIPT workWechat text
@@ -48,6 +52,7 @@ export WEBHOOK_URL="${WorkWechatWebhookUrl}"
 
 ##############################################################################
 # 测试showDoc
+# shellcheck disable=SC2154  # WEBHOOK_URL 由本机环境变量提供
 export WEBHOOK_URL="${ShowDocWebhookUrl}"
 ##############################################################################
 #$SCRIPT showDoc text
